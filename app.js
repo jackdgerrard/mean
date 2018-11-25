@@ -4,5 +4,5 @@ console.log("launching..");
 const webserver = require("./www/serve");
 
 //start API server
-//const apiserver = require("./API/apiserver");
+const apiserver = require("./API/apiserver");
 
