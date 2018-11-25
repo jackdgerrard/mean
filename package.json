@@ -1,10 +1,11 @@
 {
-  "name": "restauranty",
+  "name": "restez",
   "version": "1.0.0",
   "description": "mean app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "quickstart": "npm install && cd angular-src && ng build --prod && cd .. && npm start"
   },
   "repository": {
     "type": "git",
