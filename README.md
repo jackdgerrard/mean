@@ -26,24 +26,30 @@
 
 ### Design, develop and implement a web App for Restaurant Reviewers
 
-Jing Hua Ye, CIT 13/09/2018
+*Jing Hua Ye, CIT 13/09/2018*
 
 #### 1 Introduction
 
 In this project, you’ll build a Restaurant Reviews App that meets accessibility standards and provides
 a responsive user experience. The application must include:
-restaurant names
-a photograph  
- address
-operating hours for each restaurant along with:
-reviews, including the name of the reviewer,
-date of review,
-5-star rating system and comments.
+
+1. restaurant names,
+
+1. a photograph,
+
+1. address,
+
+1. operating hours for each restaurant,
+
+1. reviews (including the name of the reviewer, 5-star rating system and comments, date of review),
+
 The application must include:
-an application header,
-a menu providing multiple ways to filter the restaurants.
-When viewing a specific restaurant,
-current reviews must be displayed along with a form for the user to submit their own review.
+
+1. an application header,
+
+1. a menu providing multiple ways to filter the restaurants.
+
+1. When viewing a specific restaurant current reviews must be displayed along with a form for the user to submit their own review.
 
 #### 2 Requirements
 
@@ -74,31 +80,31 @@ final product.
 
 > install middleware and dependancies.
 
-```
+``` bash
 npm install
 ```
 
 > to compile angular to public folder.
 
-```
-ng build
+``` bash
+ng build --prod
 ```
 
 > launch mongoDB on Linux
 
-```
+``` bash
 $ sudo service mongo start
 ```
 
 > launch mongoDB on windows cmd as admin
 
-```
+``` bash
 net start MongoDB
 ```
 
 > launches nodemon, and Express application
 
-```
+``` bash
 npm start
 ```
 
@@ -125,5 +131,3 @@ mongoimport --db restaurants --collection restaurants --file restaurantsjson --j
 [Node.JS documentation](https://nodejs.org/en/docs/)
 
 [Brad Traversy's Youtube tutorial for creating a MEAN Application](https://www.youtube.com/watch?v=DQ9pZ2NKXRo)
-
-# mean-restaurants-app
