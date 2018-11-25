@@ -1,0 +1,31 @@
+{
+  "name": "restauranty",
+  "version": "1.0.0",
+  "description": "mean app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackdgerrard/mean-restaurants-app.git"
+  },
+  "keywords": [
+    "mean",
+    "node",
+    "restaurant",
+    "reviews"
+  ],
+  "author": "jackdgerrard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackdgerrard/mean-restaurants-app/issues"
+  },
+  "homepage": "https://github.com/jackdgerrard/mean-restaurants-app#readme",
+  "dependencies": {
+    "eslint": "^5.9.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.13",
+    "nodemon": "^1.18.6"
+  }
+}
