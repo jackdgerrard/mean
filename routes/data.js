@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const router = express.Router();
 
 //importSchemas
 restaurantSchema = require('../models/restaurant');
@@ -12,12 +13,12 @@ let Restaurant = mongoose.model('Restaurant', restaurantSchema);
 let Review = mongoose.model('Review', reviewSchema);
 
 
-app.get("*", function (req, res) {
-    console.log("API requested: " + req.url);
+router.get("*", function (req, res) {
+    console.log("data requested: " + req.url);
     res.send(` you have requested ${req.url}`);
 });
 
-app.get("/all", function (req, res) {
+router.get("/all", function (req, res) {
     console.log("API requested: " + req.url);
 
     res.send(Restaurant.find(function (err, restaurants) {
@@ -25,7 +26,7 @@ app.get("/all", function (req, res) {
     }));
 });
 
-app.post('/newReview', function (req, res) {
+router.post('/newReview', function (req, res) {
     newReview = new Review(req.body.json)
 
     newReview.save(function (err, fluffy) {
@@ -35,3 +36,4 @@ app.post('/newReview', function (req, res) {
 
 });
 
+module.exports = router;

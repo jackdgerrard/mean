@@ -54,4 +54,4 @@ router.get('/validate', (req, res, next) => {
     res.send('user valid');
 });
 
-module.exports = { router };
+module.exports = router;

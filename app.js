@@ -1,40 +1,53 @@
-//express imports
-const express = require('express');
+/* 
 
-//middleware imports
+    imports - see readme.md
+
+*/
+const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const passport = require('passport');
 
-//routes imports
-const users = require('./routes/users');
-const data = require('./routes/data');
-const view = require('./routes/view');
 
-//variables
+
+/* 
+
+    Express
+
+*/
+
 const app = express();
-const port = 80;
-const config = require('./config/database');
 const router = express.Router();
+app.use(express.static(path.join(__dirname, '/view')));
 
-//middleware
-app.use(cors);
-app.use(bodyParser.json);
+//routes imports
+app.use('/users', require('./routes/users'));
+app.use('/data', require('./routes/data'));
+
+//middleware imports
+app.use(cors = require('cors'));
+app.use((bodyParser = require('body-parser')).json);
+
+router.get("/", (req, res) => {
+    console.log("SPA requested");
+    res.sendFile(path.join(__dirname, 'view/index.html'));
+});
+
+app.listen(port = 3000, () => {
+    console.log(`listening for requests at http://localhost:${port} ...`)
+})
+
+/* 
+
+    Mongo
+
+*/
 
 //connect to Mongo  database
-mongoose.connect(config.database, { useNewUrlParser: true });
+mongoose.connect((require('./config/database')).database, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    console.log('connected to Mongo database')
+    console.log('connected to Mongo database on default port')
 });
-
-
-
-app.listen(port, function () {
-    console.log(`listening for requests at http://localhost:${port} ...`)
-})
-
