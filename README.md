@@ -76,6 +76,10 @@ The application must include:
 Submit the source code of the game through Blackboard. You need to give a quick presentation on your
 final product.
 
+## security considerations
+
+This app uses bcryptjs to ecncrypt user's passwords.
+
 ## running the application
 
 > install middleware and dependancies.
