@@ -5,10 +5,10 @@
 */
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const passport = require('passport');
-
-
+const mongoose = require('mongoose');
 
 /* 
 
@@ -18,24 +18,31 @@ const passport = require('passport');
 
 const app = express();
 const router = express.Router();
-app.use(express.static(path.join(__dirname, '/view')));
+
+
+//middleware applications
+app.use(cors());
+app.use(bodyParser.json());
 
 //routes imports
 app.use('/users', require('./routes/users'));
 app.use('/data', require('./routes/data'));
 
-//middleware imports
-app.use(cors = require('cors'));
-app.use((bodyParser = require('body-parser')).json);
 
+app.use(express.static(path.join(__dirname, '/view')));
+
+//serve angular app from view folder
 router.get("/", (req, res) => {
     console.log("SPA requested");
     res.sendFile(path.join(__dirname, 'view/index.html'));
 });
 
+
+//start server on port 3000.
 app.listen(port = 3000, () => {
     console.log(`listening for requests at http://localhost:${port} ...`)
 })
+
 
 /* 
 

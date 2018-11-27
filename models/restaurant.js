@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-let Restaurant = new Schema({
+let RestaurantSchema = new Schema({
     id: Number,
     name: String,
     neighbourhood: String,
@@ -13,4 +13,4 @@ let Restaurant = new Schema({
     reviews: Array,
 });
 
-module.exports = Restaurant;
+module.exports = RestaurantSchema;

@@ -10,14 +10,6 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    firstName: {
-        type: String,
-        required: true
-    },
-    sirName: {
-        type: String,
-        required: true
     }
 });
 
@@ -26,18 +18,19 @@ module.exports.getUserById = function (id, callback) {
 }
 
 module.exports.getUserByUserName = function (username, callback) {
-    const query = { username: username }
-    user.findOne(query, callback);
+    user.findOne({ username: username }, callback);
 }
 
-const user = module.exports = mongoose.model('User', userSchema);
-module.exports.addUser = (newUser, callback) => {
-    //hash password
+module.exports.addUser = function (newUser, callback) {
+    //salt and hash password
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
+            //set users password
             newUser.password = hash;
             newUser.save(callback);
         })
     });
 }
+
+const user = module.exports = mongoose.model('User', userSchema);
