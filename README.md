@@ -3,15 +3,25 @@
 ## Technologies Used
 
 [MongoDB](https://www.mongodb.com/)
+
 [ExpressJS](https://expressjs.com/)
+
 [Angular](https://angular.io/)
+
 [NodeJS](https://nodejs.org/en/)
+
 [NPM](https://www.npmjs.com/)
+
 [Nodemon](https://nodemon.io/)
+
 [Cors.js](https://github.com/expressjs/cors)
+
 [jsonwebtoken](https://www.jsonwebtoken.io/)
+
 [body-parser](https://www.npmjs.com/package/body-parser)
+
 [Pure CSS](https://purecss.io/)
+
 [Postman](https://www.getpostman.com/)
 
 [passport](http://www.passportjs.org/) - Authenticates http requests and is used to protect express routes. Had issue with this following tutorial, found solution [here](https://stackoverflow.com/questions/50317738/fromauthheaderasbearertoken-is-not-working-in-node)
