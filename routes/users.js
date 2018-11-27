@@ -1,10 +1,8 @@
-//express imports
+//variables
 const express = require('express');
+const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-
-//variables
-const router = express.Router();
 const app = express();
 
 //import users model
@@ -15,19 +13,19 @@ const User = require('../models/user');
 router.post('/register', (req, res, next) => {
 
     //create user model from schema
-    let newUser = new User({
+    let userObject = new User({
         username: req.body.username,
         password: req.body.password
     });
 
-    console.log(newUser)
+    //console.log(newUser)
 
     //handle http request
-    User.addUser(newUser, (err, user) => {
+    userObject.addUser(userObject, (err, user) => {
         if (err) {
-            res.json({ success: false, msg: 'failed to register user \n' + err });
+            res.json({ success: false, msg: 'failed to register user ' + err });
         } else {
-            res.json({ success: true, msg: 'user has been registered' + user.username });
+            res.json({ success: true, msg: 'user has been registered' + userObject.username });
         }
     })
 });
