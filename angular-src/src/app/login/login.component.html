@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<h2>Log in to an existing account</h2>
+
+<form>
+  <span class="form-group">
+    <label for="username-field"> Username: </label>
+    <input
+      id="username-field"
+      [(ngModel)]="username"
+      type="username"
+      required
+    />
+  </span>
+  <hr />
+  <span class="form-group">
+    <label for="password-field"> password: </label>
+    <input
+      id="password-field"
+      [(ngModel)]="password"
+      type="password"
+      required
+    />
+  </span>
+  <hr />
+  <button>let's go</button>
+</form>
+
+<p>if you do not have an account, please go to the register page</p>

@@ -36,7 +36,7 @@
 
 ### Design, develop and implement a web App for Restaurant Reviewers
 
-*Jing Hua Ye, CIT 13/09/2018*
+_Jing Hua Ye, CIT 13/09/2018_
 
 #### 1 Introduction
 
@@ -88,37 +88,37 @@ final product.
 
 ## security considerations
 
-This app uses bcryptjs to ecncrypt user's passwords.
+This app uses bcryptjs to ecncrypt user's passwords, regex to validate emails in angular
 
 ## running the application
 
 > install middleware and dependancies.
 
-``` bash
+```bash
 npm install
 ```
 
 > to compile angular to public folder.
 
-``` bash
+```bash
 ng build --prod
 ```
 
 > launch mongoDB on Linux
 
-``` bash
+```bash
 $ sudo service mongo start
 ```
 
 > launch mongoDB on windows cmd as admin
 
-``` bash
+```bash
 net start MongoDB
 ```
 
 > launches nodemon, and Express application
 
-``` bash
+```bash
 npm start
 ```
 

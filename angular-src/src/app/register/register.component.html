@@ -1,3 +1,27 @@
-<p>
-  register works!
-</p>
+<h2>Register an account</h2>
+
+<form (submit)="onRegisterSubmit()">
+  <span class="form-group">
+    <label for="username-field"> Username: </label>
+    <input
+      id="username-field"
+      [(ngModel)]="username"
+      name="username"
+      type="username"
+      required
+    />
+  </span>
+
+  <span class="form-group">
+    <label for="password-field"> password: </label>
+    <input
+      id="password-field"
+      [(ngModel)]="password"
+      name="password"
+      type="password"
+      required
+    />
+  </span>
+
+  <button type="submit">let's go</button>
+</form>
