@@ -2,20 +2,20 @@
 
 <form (submit)="onRegisterSubmit()">
   <span class="form-group">
-    <label for="username-field"> Username: </label>
+    <label for="username"> Username: </label>
     <input
-      id="username-field"
+      id="username"
       [(ngModel)]="username"
       name="username"
-      type="username"
+      type="text"
       required
     />
   </span>
 
   <span class="form-group">
-    <label for="password-field"> password: </label>
+    <label for="password"> password: </label>
     <input
-      id="password-field"
+      id="password"
       [(ngModel)]="password"
       name="password"
       type="password"
@@ -23,5 +23,5 @@
     />
   </span>
 
-  <button type="submit">let's go</button>
+  <button type="submit">Sign Up</button>
 </form>

@@ -8,25 +8,27 @@ const bcrypt = require("bcryptjs");
 const config = require("../config/database");
 
 //import users model
-const User = require("../models/user");
+const user = require("../models/user");
 
 //register new user
 
 router.post("/register", (req, res, next) => {
   //create user model from schema
-  let userObject = new User({
+  let newUser = new user({
     username: req.body.username,
     password: req.body.password
   });
 
+  console.log(newUser);
+
   //handle http request
-  userObject.addUser(userObject, (err, user) => {
+  addUser(newUser, (err, user) => {
     if (err) {
       res.json({ success: false, msg: "failed to register user " + err });
     } else {
       res.json({
         success: true,
-        msg: "user has been registered " + userObject.username
+        msg: "user has been registered " + newUser.username
       });
     }
   });
@@ -88,6 +90,16 @@ comparePassword = (candidatepassword, hash, callback) => {
   bcrypt.compare(candidatepassword, hash, (err, isMatch) => {
     if (err) throw err;
     callback(null, isMatch);
+  });
+};
+
+addUser = function(newUser, callback) {
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      newUser.save(callback);
+    });
   });
 };
 
