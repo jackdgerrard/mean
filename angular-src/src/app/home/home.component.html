@@ -1,4 +1,9 @@
-<p>
+<p *ngIf="!loggedIn">
   <a [routerLink]="['/register']">sign up</a> or
   <a [routerLink]="['/login']"> log in </a> to continue
 </p>
+
+<section *ngIf="loggedIn">
+  <h2>logged in as {{ username }}</h2>
+  <app-restaurants></app-restaurants>
+</section>

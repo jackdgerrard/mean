@@ -10,12 +10,11 @@ export class RestaurantsComponent implements OnInit {
   constructor(private restaurants: RestaurantsService) {}
 
   allRestaurants: object;
+  order: boolean = true;
 
   ngOnInit() {
     this.allRestaurants = this.restaurants.getAllRestaurants();
   }
-
-  order: boolean = true;
 
   //sort the restaurants
   if(order = true) {

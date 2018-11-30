@@ -16,6 +16,7 @@ import { RestaurantsComponent } from "./restaurants/restaurants.component";
 import { ValidateService } from "./validate.service";
 import { AuthService } from "./auth.service";
 import { RestaurantsService } from "./restaurants.service";
+import { CookieService } from "angular2-cookie/services/cookies.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { RestaurantsService } from "./restaurants.service";
     RestaurantsComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpModule],
-  providers: [ValidateService, RestaurantsService, AuthService],
+  providers: [ValidateService, RestaurantsService, AuthService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

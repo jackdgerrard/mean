@@ -18,4 +18,6 @@ export class ValidateService {
     let regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/gim;
     return regex.test(email);
   }
+
+  registerUser(user) {}
 }

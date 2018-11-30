@@ -3,6 +3,7 @@ import { ValidateService } from "../validate.service";
 import { AuthService } from "../auth.service";
 import { Router, RouterLink } from "@angular/router";
 import { fromEventPattern } from "rxjs";
+import { CookieService } from "angular2-cookie/core";
 
 @Component({
   selector: "app-register",
@@ -10,13 +11,14 @@ import { fromEventPattern } from "rxjs";
   styleUrls: ["./register.component.sass"]
 })
 export class RegisterComponent implements OnInit {
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 
   constructor(
     private validateService: ValidateService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {}
@@ -27,19 +29,17 @@ export class RegisterComponent implements OnInit {
       password: this.password
     };
 
-    console.log(user);
-
     //required fields
-    if (this.validateService.validateRegister(user)) {
+    if (!this.validateService.validateRegister(user)) {
       console.log("please fill in the required field");
     }
 
     //register User
-
     this.auth.registerUser(user).subscribe(data => {
       if (data.success) {
         console.log(user.username + `\'s account has been created`);
-        this.router.navigate(["/login"]);
+        this.cookieService.put("username", user.username);
+        this.router.navigate(["/home"]);
       } else console.log(`error`);
     });
     //email validation here if email is implemented in applications user model

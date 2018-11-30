@@ -1,27 +1,27 @@
 <h2>Log in to an existing account</h2>
 
-<form>
+<form (submit)="onLoginSubmit()">
   <span class="form-group">
-    <label for="username-field"> Username: </label>
+    <label for="username"> Username: </label>
     <input
-      id="username-field"
+      id="username"
       [(ngModel)]="username"
-      type="username"
+      name="username"
+      type="text"
       required
     />
   </span>
-  <hr />
+
   <span class="form-group">
-    <label for="password-field"> password: </label>
+    <label for="password"> password: </label>
     <input
-      id="password-field"
+      id="password"
       [(ngModel)]="password"
+      name="password"
       type="password"
       required
     />
   </span>
-  <hr />
-  <button>let's go</button>
-</form>
 
-<p>if you do not have an account, please go to the register page</p>
+  <button type="submit">Log in</button>
+</form>

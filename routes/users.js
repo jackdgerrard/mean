@@ -83,7 +83,7 @@ getUserById = (id, callback) => {
 };
 
 getUserByUsername = (username, callback) => {
-  User.findOne({ username: username }, callback);
+  user.findOne({ username: username }, callback);
 };
 
 comparePassword = (candidatepassword, hash, callback) => {
