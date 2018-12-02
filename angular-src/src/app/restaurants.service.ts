@@ -9,6 +9,7 @@ export class RestaurantsService {
   constructor(private http: Http) {}
 
   getAllRestaurants() {
-    return this.http.get("http://localhost:3000/data/getall");
+    console.log("made requests");
+    return this.http.get("http://localhost:3000/data/all");
   }
 }

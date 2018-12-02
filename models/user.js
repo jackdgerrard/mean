@@ -6,7 +6,8 @@ const config = require("../config/database");
 const UserSchema = mongoose.Schema({
   username: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
     type: String,
@@ -15,6 +16,8 @@ const UserSchema = mongoose.Schema({
 });
 
 const User = (module.exports = mongoose.model("User", UserSchema));
+
+//get one user by username
 
 module.exports.getUserById = function(id, callback) {
   User.findById(id, callback);

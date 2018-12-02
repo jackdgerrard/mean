@@ -1,39 +1,74 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const path = require("path");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const router = express.Router();
 
-//importSchemas
-restaurantSchema = require('../models/restaurant');
-reviewSchema = require('../models/review');
+//reviews
+reviewSchema = require("../models/review");
 
-let Restaurant = mongoose.model('Restaurant', restaurantSchema);
-let Review = mongoose.model('Review', reviewSchema);
+//restaurants
 
+let RestaurantSchema = new mongoose.Schema(
+  {
+    id: { type: mongoose.Schema.Types.ObjectId },
+    name: String,
+    neighbourhood: String,
+    photograph: String,
+    address: String,
+    latlng: Object,
+    cuisine_type: String,
+    operating_hours: Object,
+    reviews: Array
+  },
+  { collection: "restaurantsCollection" }
+);
+//restaurant model
 
-router.get("*", function (req, res) {
-    console.log("data requested: " + req.url);
-    res.send(` you have requested ${req.url}`);
+restaurantModel = mongoose.model("restaurantModel", RestaurantSchema);
+
+//get all restaurants
+
+function getAllRestauarants() {
+  console.log("mongoose fetching all restaurants ");
+  console.log(">>>> ");
+
+  data = restaurantModel.find({}, (err, allrestaurants) => {
+    if (err) return console.error(err);
+    console.log(allrestaurants);
+  });
+
+  return data;
+}
+
+//Express routes
+
+router.get("/", function(req, res) {
+  res.send("invalid data endpoint");
 });
 
-router.get("/all", function (req, res) {
-    console.log("API requested: " + req.url);
+router.get("/all", function(req, res) {
+  console.log("data requested: " + req.url);
 
-    res.send(Restaurant.find(function (err, restaurants) {
-        if (err) return console.error(err);
-    }));
+  let data = getAllRestauarants();
+  //console.log(data);
+
+  res.send(data);
 });
 
-router.post('/newReview', function (req, res) {
-    newReview = new Review(req.body.json)
+router.post("/newReview", function(req, res) {
+  newReview = new Review(req.body.json);
 
-    newReview.save(function (err, fluffy) {
-        if (err) return console.error(err);
-        console.log(`new review from ${newReview.name}`)
-    });
+  let name = Review.name;
+  let text = Review.comments;
+  let date = Review.date;
+  let rating = Review.rating;
 
+  newReview.save(function(err, newReview) {
+    if (err) return console.error(err);
+    console.log(`new review from ${newReview.name}`);
+  });
 });
 
 module.exports = router;

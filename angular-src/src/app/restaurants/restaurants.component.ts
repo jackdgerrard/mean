@@ -7,23 +7,13 @@ import { RestaurantsService } from "../restaurants.service";
   styleUrls: ["./restaurants.component.sass"]
 })
 export class RestaurantsComponent implements OnInit {
-  constructor(private restaurants: RestaurantsService) {}
-
   allRestaurants: object;
   order: boolean = true;
 
+  constructor(private restaurantsService: RestaurantsService) {}
+
   ngOnInit() {
-    this.allRestaurants = this.restaurants.getAllRestaurants();
-  }
-
-  //sort the restaurants
-  if(order = true) {
-    console.log("ascending");
-    //sort by ascending
-  }
-
-  elseif(order = false) {
-    //sort by descending
-    console.log("descending");
+    this.allRestaurants = this.restaurantsService.getAllRestaurants();
+    console.log(this.allRestaurants);
   }
 }
