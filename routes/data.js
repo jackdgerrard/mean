@@ -2,62 +2,41 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const MongoClient = require('mongodb').MongoClient
 const router = express.Router();
 
+const dbconfig = require('../config/database');
 //reviews
 reviewSchema = require("../models/review");
 
-//restaurants
+let db;
 
-let RestaurantSchema = new mongoose.Schema(
-  {
-    id: { type: mongoose.Schema.Types.ObjectId },
-    name: String,
-    neighbourhood: String,
-    photograph: String,
-    address: String,
-    latlng: Object,
-    cuisine_type: String,
-    operating_hours: Object,
-    reviews: Array
-  },
-  { collection: "restaurantsCollection" }
-);
-//restaurant model
-
-restaurantModel = mongoose.model("restaurantModel", RestaurantSchema);
-
+MongoClient.connect(dbconfig.database, (err, client) => {
+  if (err) return console.log(err)
+  db = client.db('restaurants')
+})
 //get all restaurants
 
-function getAllRestauarants() {
-  console.log("mongoose fetching all restaurants ");
-  console.log(">>>> ");
+function getAllData() {
 
-  data = restaurantModel.find({}, (err, allrestaurants) => {
-    if (err) return console.error(err);
-    console.log(allrestaurants);
-  });
-
-  return data;
 }
 
 //Express routes
 
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   res.send("invalid data endpoint");
 });
 
-router.get("/all", function(req, res) {
-  console.log("data requested: " + req.url);
+router.get("/all", function (req, res) {
+  console.log(req.url + " request recieved");
+  var cursor = db.collection('restaurantsCollection').find().toArray(function (err, results) {
+    console.table(results);
+    res.json(results);
+  })
 
-  let data = getAllRestauarants();
-  //console.log(data);
-
-  res.send(data);
 });
 
-router.post("/newReview", function(req, res) {
+router.post("/newReview", function (req, res) {
   newReview = new Review(req.body.json);
 
   let name = Review.name;
@@ -65,7 +44,7 @@ router.post("/newReview", function(req, res) {
   let date = Review.date;
   let rating = Review.rating;
 
-  newReview.save(function(err, newReview) {
+  newReview.save(function (err, newReview) {
     if (err) return console.error(err);
     console.log(`new review from ${newReview.name}`);
   });

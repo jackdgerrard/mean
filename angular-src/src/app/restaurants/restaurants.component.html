@@ -1,3 +1,14 @@
-<h1>Restaurants</h1>
+<h2>Restaurants</h2>
 
-{{ allRestaurants }}
+<ul *ngIf="allRestaurants">
+    <li *ngFor="let restaurant of allRestaurants">
+        <h3>{{restaurant.name}}</h3>
+        <h4>{{restaurant.address}}</h4>
+        {{restaurant.cusine_type}}
+
+        <h5> operating hours </h5>
+        <p> Monday {{restaurant.operating_hours.Monday}}</p>
+        <p> Tuesday {{restaurant.operating_hours.Tuesday}}</p>
+        <p> Tuesday {{restaurant.operating_hours.Tuesday}}</p>
+    </li>
+</ul>

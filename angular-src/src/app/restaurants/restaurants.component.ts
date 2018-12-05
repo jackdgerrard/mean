@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { RestaurantsService } from "../restaurants.service";
+import { DataService } from "../data.service";
+
 
 @Component({
   selector: "app-restaurants",
@@ -7,13 +8,16 @@ import { RestaurantsService } from "../restaurants.service";
   styleUrls: ["./restaurants.component.sass"]
 })
 export class RestaurantsComponent implements OnInit {
-  allRestaurants: object;
-  order: boolean = true;
 
-  constructor(private restaurantsService: RestaurantsService) {}
+  constructor(private data: DataService) { }
+
+  allRestaurants: object;
 
   ngOnInit() {
-    this.allRestaurants = this.restaurantsService.getAllRestaurants();
-    console.log(this.allRestaurants);
+    this.data.getData().subscribe(data => {
+      this.allRestaurants = data;
+      console.table(data);
+    })
   }
 }
+
