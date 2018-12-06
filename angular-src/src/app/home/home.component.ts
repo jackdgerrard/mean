@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   loggedIn: boolean;
   username: string;
 
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
     this.username = this.cookieService.get("username");
@@ -23,4 +23,6 @@ export class HomeComponent implements OnInit {
       console.log("hi name:" + this.username);
     }
   }
+
+
 }

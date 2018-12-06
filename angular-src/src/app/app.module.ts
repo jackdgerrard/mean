@@ -1,7 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-//import { HttpModule } from "@angular/http";
+import { HttpModule } from "@angular/http";
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -12,7 +13,6 @@ import { RegisterComponent } from "./register/register.component";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { RestaurantsComponent } from "./restaurants/restaurants.component";
-import { HttpClientModule } from '@angular/common/http';
 
 import { ValidateService } from "./validate.service";
 import { AuthService } from "./auth.service";
@@ -31,7 +31,7 @@ import { DataService } from "./data.service";
     RestaurantsComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,],
-  providers: [ValidateService, AuthService, DataService, CookieService,],
+  providers: [ValidateService, AuthService, DataService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

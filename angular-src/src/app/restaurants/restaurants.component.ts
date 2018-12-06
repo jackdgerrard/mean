@@ -16,7 +16,6 @@ export class RestaurantsComponent implements OnInit {
   ngOnInit() {
     this.data.getData().subscribe(data => {
       this.allRestaurants = data;
-      console.table(data);
     })
   }
 }

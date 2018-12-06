@@ -1,9 +1,7 @@
 <nav>
-  <div><a class="logo" [routerLink]="['/']"> Rest EZ </a></div>
+  <div><a class="logo" [routerLink]="['/home']"> Rest EZ </a></div>
   <a [routerLink]="['/about']">About Rest Ez</a>
-  <span id="log">
-    <a [routerLink]="['/login']"> log in </a> <br />
-    <a [routerLink]="['/register']">sign up</a> <br />
-    <a [routerLink]="['/register']">sign out</a>
-  </span>
+  <a [routerLink]="['/login']" *ngIf="!loggedIn"> log in </a>
+  <a [routerLink]="['/register']" *ngIf="!loggedIn">sign up</a>
+  <p (click)="logOut()" *ngIf="loggedIn">sign out</p>
 </nav>

@@ -5,7 +5,6 @@ import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AboutComponent } from "./about/about.component";
-import { RestaurantsComponent } from "./restaurants/restaurants.component";
 
 const routes: Routes = [
   {
@@ -25,12 +24,14 @@ const routes: Routes = [
     path: "login",
     component: LoginComponent
   },
-  { path: "restaurants", component: RestaurantsComponent },
-  { path: "register", component: RegisterComponent }
+  {
+    path: "register",
+    component: RegisterComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

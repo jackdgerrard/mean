@@ -297,10 +297,10 @@ MIT
 @angular/router
 MIT
 
-@angular/http
+@angular/forms
 MIT
 
-@angular/forms
+@angular/http
 MIT
 
 @angular/core

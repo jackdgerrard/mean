@@ -1,14 +1,18 @@
 <h2>Restaurants</h2>
 
-<ul *ngIf="allRestaurants">
-    <li *ngFor="let restaurant of allRestaurants">
+<div id="flexbox" *ngIf="allRestaurants">
+    <span *ngFor="let restaurant of allRestaurants">
         <h3>{{restaurant.name}}</h3>
-        <h4>{{restaurant.address}}</h4>
-        {{restaurant.cusine_type}}
+        <p>{{restaurant.neighbourhood}}</p>
+        <p>{{restaurant.cuisine_type}}</p>
 
         <h5> operating hours </h5>
         <p> Monday {{restaurant.operating_hours.Monday}}</p>
         <p> Tuesday {{restaurant.operating_hours.Tuesday}}</p>
-        <p> Tuesday {{restaurant.operating_hours.Tuesday}}</p>
-    </li>
-</ul>
+        <p> Wednesday {{restaurant.operating_hours.Wednesday}}</p>
+        <p> Thursday {{restaurant.operating_hours.Thursday}}</p>
+        <p> Friday {{restaurant.operating_hours.Friday}}</p>
+        <p> Saturday {{restaurant.operating_hours.Saturday}}</p>
+        <p> Sunday {{restaurant.operating_hours.Sunday}}</p>
+    </span>
+</div>
