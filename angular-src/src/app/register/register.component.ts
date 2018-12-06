@@ -19,9 +19,9 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private cookieService: CookieService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onRegisterSubmit() {
     const user = {
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
     //register User
     this.auth.registerUser(user).subscribe(data => {
-      if (data.success) {
+      if (data) {
         console.log(user.username + `\'s account has been created`);
         this.cookieService.put("username", user.username);
         this.router.navigate(["/home"]);

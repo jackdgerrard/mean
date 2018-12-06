@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private cookieService: CookieService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onLoginSubmit() {
     const user = {
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.auth.authenticateUser(user).subscribe(data => {
-      if (data.success == true) {
+      if (data) {
         this.cookieService.put("username", user.username);
         this.router.navigate(["/home"]);
       } else {

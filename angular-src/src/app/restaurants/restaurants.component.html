@@ -1,18 +1,59 @@
-<h2>Restaurants</h2>
+<h1>Restaurants</h1>
 
-<div id="flexbox" *ngIf="allRestaurants">
-    <span *ngFor="let restaurant of allRestaurants">
-        <h3>{{restaurant.name}}</h3>
-        <p>{{restaurant.neighbourhood}}</p>
-        <p>{{restaurant.cuisine_type}}</p>
+<div id="grid">
 
-        <h5> operating hours </h5>
-        <p> Monday {{restaurant.operating_hours.Monday}}</p>
-        <p> Tuesday {{restaurant.operating_hours.Tuesday}}</p>
-        <p> Wednesday {{restaurant.operating_hours.Wednesday}}</p>
-        <p> Thursday {{restaurant.operating_hours.Thursday}}</p>
-        <p> Friday {{restaurant.operating_hours.Friday}}</p>
-        <p> Saturday {{restaurant.operating_hours.Saturday}}</p>
-        <p> Sunday {{restaurant.operating_hours.Sunday}}</p>
-    </span>
+    <div id="flexbox" *ngIf="allRestaurants">
+        <span *ngFor="let restaurant of allRestaurants" (click)="openRestaurant(restaurant)">
+            <p class="title">{{restaurant.name}}</p>
+            <p>{{restaurant.neighborhood}}</p>
+            <p>{{restaurant.cuisine_type}}</p>
+
+        </span>
+    </div>
+
+    <div id="clickedRestaurant" *ngIf="currentSelection">
+        <h2>{{currentSelection.name}}</h2>
+        <p>{{currentSelection.neighborhood}}</p>
+        <p>{{currentSelection.cuisine_type}}</p>
+
+        <img src="assets/{{currentSelection.photograph}}" alt="{{currentSelection.name}}">
+
+        <h5> opening hours </h5>
+
+        <p> Monday {{currentSelection.operating_hours.Monday}}</p>
+        <p> Tuesday {{currentSelection.operating_hours.Tuesday}}</p>
+        <p> Wednesday {{currentSelection.operating_hours.Wednesday}}</p>
+        <p> Thursday {{currentSelection.operating_hours.Thursday}}</p>
+        <p> Friday {{currentSelection.operating_hours.Friday}}</p>
+        <p> Saturday {{currentSelection.operating_hours.Saturday}}</p>
+        <p> Sunday {{currentSelection.operating_hours.Sunday}}</p>
+
+        <h3>Address</h3>
+        <p>{{currentSelection.address}}</p>
+
+        <h3>Reviews</h3>
+        <div *ngFor="let review of currentSelection.reviews" id="aReview">
+            <h2>{{ review.name }} {{review.rating}}</h2>
+
+            <p> {{review.comments}} ({{review.date}})</p>
+        </div>
+
+
+        <form onsubmit="onReviewSubmit()">
+            <label> Comments: </label>
+            <input type="text" id="text">
+            <label> rating</label>
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+
 </div>
