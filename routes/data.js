@@ -9,12 +9,13 @@ const dbconfig = require('../config/database');
 //reviews
 reviewSchema = require("../models/review");
 
-let db;
+var db;
 
-MongoClient.connect(dbconfig.database, (err, client) => {
+MongoClient.connect(dbconfig.database, { useNewUrlParser: true }, (err, client) => {
   if (err) return console.log(err)
   db = client.db('restaurants')
 })
+
 //get all restaurants
 
 function getAllData() {
@@ -29,25 +30,26 @@ router.get("/", function (req, res) {
 
 router.get("/all", function (req, res) {
   console.log(req.url + " request recieved");
-  var cursor = db.collection('restaurantsCollection').find().toArray(function (err, results) {
-    console.table(results);
+  db.collection('restaurantsCollection').find().toArray(function (err, results) {
+    //console.table(results);
     res.json(results);
   })
 
 });
 
 router.post("/newReview", function (req, res) {
-  newReview = new Review(req.body.json);
 
-  let name = Review.name;
-  let text = Review.comments;
-  let date = Review.date;
-  let rating = Review.rating;
+  updatedRestaurant = req.body;
+  query = { 'name': `req.body.name` };
+  replacement = updatedRestaurant;
+  options = { upsert: true };
 
-  newReview.save(function (err, newReview) {
-    if (err) return console.error(err);
-    console.log(`new review from ${newReview.name}`);
-  });
+  console.log(req.url + " request recieved");
+  console.log('this was recieved ->')
+  console.log(updatedRestaurant);
+
+  db.collection('restaurantsCollection').replaceOne(query, replacement, options);
+
 });
 
 module.exports = router;

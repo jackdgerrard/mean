@@ -15,7 +15,13 @@ export class RestaurantsComponent implements OnInit {
   constructor(private data: DataService, private cookieService: CookieService) { }
 
   allRestaurants: object;
-  currentSelection: object;
+  currentSelection;
+
+  username
+  comments
+  rating
+  date
+
 
 
   ngOnInit() {
@@ -24,20 +30,30 @@ export class RestaurantsComponent implements OnInit {
     })
   }
 
-  openRestaurant(object) {
-
-    console.log('clicked object ' + object.name);
-
-    this.currentSelection = object
+  openRestaurant(restaurant) {
+    console.log('clicked restaurant ' + restaurant._id);
+    this.currentSelection = restaurant
   }
 
   onReviewSubmit() {
     const review = {
-      username: this.cookieService.get("username"),
+      name: this.cookieService.get("username"),
       date: (new Date()).toLocaleDateString('en-GB'),
       comments: this.comments,
-      rating: this.rating
+      rating: this.rating,
+      restaurantName: this.currentSelection.name
     }
+
+    let temp = this.currentSelection;
+    temp.reviews.push(review);
+
+    console.table(temp)
+
+    this.data.updateRestaurant(temp).subscribe(data => {
+      if (data) {
+        console.log(`review sent`);
+      } else console.log(`error`);
+    });
   }
 }
 
