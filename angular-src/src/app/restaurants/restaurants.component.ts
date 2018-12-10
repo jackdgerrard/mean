@@ -14,7 +14,7 @@ export class RestaurantsComponent implements OnInit {
 
   constructor(private data: DataService, private cookieService: CookieService) { }
 
-  allRestaurants: object;
+  allRestaurants;
   currentSelection;
 
   username
@@ -22,7 +22,8 @@ export class RestaurantsComponent implements OnInit {
   rating
   date
 
-
+  neighborhood
+  type
 
   ngOnInit() {
     this.data.getData().subscribe(data => {
@@ -35,6 +36,7 @@ export class RestaurantsComponent implements OnInit {
     this.currentSelection = restaurant
   }
 
+  //submit new review
   onReviewSubmit() {
     const review = {
       name: this.cookieService.get("username"),
@@ -53,6 +55,32 @@ export class RestaurantsComponent implements OnInit {
       if (data) {
         console.log(`review sent`);
       } else console.log(`error`);
+    });
+  }
+
+  onOrderSubmit() {
+    let filters = { 'neighborhood': this.neighborhood, 'type': this.type };
+    console.table(filters)
+    this.data.getDataWithFilter(filters).subscribe(data => {
+      this.allRestaurants = data;
+    })
+  }
+
+  ascending() {
+    this.allRestaurants.sort((a, b) => {
+      a = a.name.toLowerCase();
+      b = b.name.toLowerCase();
+
+      return a < b ? -1 : a > b ? 1 : 0;
+    });
+  }
+
+  descending() {
+    this.allRestaurants.sort((a, b) => {
+      a = a.name.toLowerCase();
+      b = b.name.toLowerCase();
+
+      return a > b ? -1 : a < b ? 1 : 0;
     });
   }
 }

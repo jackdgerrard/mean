@@ -34,22 +34,32 @@ router.get("/all", function (req, res) {
     //console.table(results);
     res.json(results);
   })
+});
 
+router.get("/filter", function (req, res) {
+  console.log(req.url + " request recieved");
+  //filters = req.body;
+  console.table(req.body)
+  db.collection('restaurantsCollection').find().toArray(function (err, results) {
+    //console.table(results);
+    res.json(results);
+  })
 });
 
 router.post("/newReview", function (req, res) {
 
+  //extract data from request
   updatedRestaurant = req.body;
   query = { 'name': `req.body.name` };
   replacement = updatedRestaurant;
   options = { upsert: true };
 
   console.log(req.url + " request recieved");
-  console.log('this was recieved ->')
-  console.log(updatedRestaurant);
 
-  db.collection('restaurantsCollection').replaceOne(query, replacement, options);
-
+  //log to the DB
+  try {
+    db.collection('restaurantsCollection').replaceOne(query, replacement, options);
+  } catch (e) { console.error(e); }
 });
 
 module.exports = router;

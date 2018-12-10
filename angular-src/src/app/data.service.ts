@@ -16,6 +16,15 @@ export class DataService {
     return this.http.get('http://localhost:3000/data/all');
   }
 
+  getDataWithFilter(filters) {
+    let headers = new HttpHeaders();
+    headers.append("Content-Type", "application/json");
+    console.table(filters)
+
+    return this.http.get("http://localhost:3000/data/filter", filters);
+  }
+
+  //update the restaurant with new data that includes review
   updateRestaurant(updatedRestaurant) {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");

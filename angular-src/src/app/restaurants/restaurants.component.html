@@ -1,5 +1,32 @@
 <h1>Restaurants</h1>
 
+<form (submit)="onOrderSubmit()">
+    <h2>Sort by:</h2>
+    <! --type -->
+    <label for="type"> type </label>
+    <select [(ngModel)]="type" name="type" required>
+        <option value="*">*</option>
+        <option value="American">American</option>
+        <option value="Pizza">Pizza</option>
+        <option value="Asian">Asian</option>
+        <option value="Mexican">Mexican</option>
+    </select>
+
+    <! --neighborhood -->
+    <label for="neighborhood"> neighborhood </label>
+    <select [(ngModel)]="neighborhood" name="type" required>
+        <option value="*">*</option>
+        <option value="Manhattan">Manhattan</option>
+        <option value="Brooklyn">Brooklyn</option>
+        <option value="Queens">Queens</option>
+    </select>
+
+    <button type="submit">Submit</button>
+</form>
+
+<button (click)="ascending()">ascending</button>
+<button (click)="descending()">descending</button>
+
 <div id="grid">
 
     <div id="flexbox" *ngIf="allRestaurants">
@@ -7,7 +34,6 @@
             <p class="title">{{restaurant.name}}</p>
             <p>{{restaurant.neighborhood}}</p>
             <p>{{restaurant.cuisine_type}}</p>
-
         </span>
     </div>
 
@@ -33,9 +59,10 @@
 
         <h3>Reviews</h3>
         <div *ngFor="let review of currentSelection.reviews" id="aReview">
-            <h2>{{ review.name }} {{review.rating}}</h2>
+            <h2>{{ review.name }} </h2>
+            <p>rating: {{review.rating}}</p>
 
-            <p> {{review.comments}} ({{review.date}})</p>
+            <p> {{review.comments}} <br /> ({{review.date}})</p>
         </div>
 
         <h3>Add a new review</h3>
@@ -44,7 +71,7 @@
             <label for="comments"> Comments: </label>
             <input type="text" name="comments" [(ngModel)]="comments" required>
             <br />
-            <label for="rating"> rating</label>
+            <label for="rating"> rating </label>
             <select [(ngModel)]="rating" name="rating" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
