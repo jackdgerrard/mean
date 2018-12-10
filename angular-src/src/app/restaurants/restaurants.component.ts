@@ -14,14 +14,17 @@ export class RestaurantsComponent implements OnInit {
 
   constructor(private data: DataService, private cookieService: CookieService) { }
 
+  //global data variables
   allRestaurants;
   currentSelection;
 
+  //review variables
   username
   comments
   rating
   date
 
+  //filters
   neighborhood
   type
 
@@ -49,8 +52,6 @@ export class RestaurantsComponent implements OnInit {
     let temp = this.currentSelection;
     temp.reviews.push(review);
 
-    console.table(temp)
-
     this.data.newData(temp).subscribe(data => {
       if (data) {
         console.log(`review sent`);
@@ -58,10 +59,20 @@ export class RestaurantsComponent implements OnInit {
     });
   }
 
-  onOrderSubmit() {
-    let filters = { 'neighborhood': this.neighborhood, 'type': this.type };
-    console.table(filters)
-    this.data.getDataWithFilter(filters).subscribe(data => {
+  getByType() {
+    this.data.getDatabyType(this.type).subscribe(data => {
+      this.allRestaurants = data;
+    });
+  }
+
+  getByNeighborhood() {
+    this.data.getDatabyNeighborhood(this.neighborhood).subscribe(data => {
+      this.allRestaurants = data;
+    });
+  }
+
+  resetFilter() {
+    this.data.getData().subscribe(data => {
       this.allRestaurants = data;
     })
   }

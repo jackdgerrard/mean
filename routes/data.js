@@ -17,34 +17,41 @@ MongoClient.connect(dbconfig.database, { useNewUrlParser: true }, (err, client) 
 
 //Express routes access mongo directly without Mongoose
 
-router.get("/", function (req, res) {
+router.get("/", (req, res) => {
   res.send("invalid data endpoint");
 });
 
-router.get("/all", function (req, res) {
-  console.log(req.url + " request recieved");
+router.get("/all", (req, res) => {
+  console.log(req.originalUrl + " request recieved");
   db.collection('restaurantsCollection').find().toArray(function (err, results) {
     //console.table(results);
     res.json(results);
   })
 });
 
-router.get("/filter", function (req, res) {
-  console.log(req.url + " request recieved");
-  console.table(req.body)
+router.get("/filter/type:query", (req, res) => {
+  console.log(req.originalUrl + " request recieved");
+  console.table(req.params.query)
   db.collection('restaurantsCollection').find(
-    {
-      $and: [
-        { 'cuisine_type': req.body.type },
-        { 'neighborhood': req.body.neighborhood }
-      ]
-    }).toArray(function (err, results) {
-      //console.table(results);
-      res.json(results);
-    })
+    { 'cuisine_type': req.params.query }
+  ).toArray(function (err, results) {
+    //console.table(results);
+    res.json(results);
+  })
 });
 
-router.post("/newData", function (req, res) {
+router.get("/filter/neighborhood:query", (req, res) => {
+  console.log(req.originalUrl + " request recieved");
+  console.table(req.params.query)
+  db.collection('restaurantsCollection').find(
+    { 'neighborhood': req.params.query }
+  ).toArray(function (err, results) {
+    //console.table(results);
+    res.json(results);
+  })
+});
+
+router.post("/newData", (req, res) => {
 
   //extract data from request
   updatedRestaurant = req.body;
@@ -52,7 +59,7 @@ router.post("/newData", function (req, res) {
   replacement = updatedRestaurant;
   options = { upsert: true };
 
-  console.log(req.url + " request recieved");
+  console.log(req.originalUrl + " request recieved");
 
   //log to the DB
   try {
