@@ -6,23 +6,16 @@ const MongoClient = require('mongodb').MongoClient
 const router = express.Router();
 
 const dbconfig = require('../config/database');
-//reviews
-reviewSchema = require("../models/review");
 
-var db;
+//make db global
+let db;
 
 MongoClient.connect(dbconfig.database, { useNewUrlParser: true }, (err, client) => {
   if (err) return console.log(err)
   db = client.db('restaurants')
 })
 
-//get all restaurants
-
-function getAllData() {
-
-}
-
-//Express routes
+//Express routes access mongo directly without Mongoose
 
 router.get("/", function (req, res) {
   res.send("invalid data endpoint");
@@ -38,15 +31,20 @@ router.get("/all", function (req, res) {
 
 router.get("/filter", function (req, res) {
   console.log(req.url + " request recieved");
-  //filters = req.body;
   console.table(req.body)
-  db.collection('restaurantsCollection').find().toArray(function (err, results) {
-    //console.table(results);
-    res.json(results);
-  })
+  db.collection('restaurantsCollection').find(
+    {
+      $and: [
+        { 'cuisine_type': req.body.type },
+        { 'neighborhood': req.body.neighborhood }
+      ]
+    }).toArray(function (err, results) {
+      //console.table(results);
+      res.json(results);
+    })
 });
 
-router.post("/newReview", function (req, res) {
+router.post("/newData", function (req, res) {
 
   //extract data from request
   updatedRestaurant = req.body;

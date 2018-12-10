@@ -20,8 +20,6 @@
 
 [body-parser](https://www.npmjs.com/package/body-parser)
 
-[Pure CSS](https://purecss.io/)
-
 [Postman](https://www.getpostman.com/)
 
 [passport](http://www.passportjs.org/) - Authenticates http requests and is used to protect express routes. Had issue with this following tutorial, found solution [here](https://stackoverflow.com/questions/50317738/fromauthheaderasbearertoken-is-not-working-in-node)
@@ -77,8 +75,7 @@ The application must include:
 6. It allows users to submit a restaurant review via a new review form online and offline.
 7. It allows users to mark a restaurant as a favourite.
 8. All content-related images include appropriate alternate text.
-9. Uses MongoDB to cache JSON responses from a Node.js server. There maybe a small variation in
-   MySQL version.
+9. Uses MongoDB to cache JSON responses from a Node.js server. There maybe a small variation in MySQL version.
    10.Try to meet the above requirements as much as you can.
 
 #### 3 Submission
@@ -90,36 +87,48 @@ final product.
 
 This app uses bcryptjs to ecncrypt user's passwords, regex to validate emails in angular
 
+## update possibilities
+
+I have included the ability to validate email address at sign up using regex in Angular if feature is to be implemented in future.
+
+The newData Functions in Node and Angular will permit the addition of a new restaurant to be added in the future if that feature is requested. This could be achieved with a front end form in Angular easily enough.
+
 ## running the application
 
 > install middleware and dependancies.
 
 ```bash
-npm install
+$npm install
 ```
 
-> to compile angular to public folder.
+> to compile angular to public folder (when in Angular-src folder).
 
 ```bash
-ng build --prod
+$ng build --prod
 ```
 
 > launch mongoDB on Linux
 
 ```bash
-$ sudo service mongo start
+$sudo service mongo start
 ```
 
-> launch mongoDB on windows cmd as admin
+> launch mongoDB on windows in cmd as admin
 
 ```bash
-net start MongoDB
+$net start MongoDB
 ```
 
 > launches nodemon, and Express application
 
 ```bash
-npm start
+$npm start
+```
+
+> To compile angular app in production mode and start server
+
+```bash
+$npm run quickstart
 ```
 
 ## Mongo Commands
@@ -128,8 +137,14 @@ npm start
 
 ### command for importing restaurants _after converting json to json array_
 
+```bash
+$mongoimport -d restaurants -c restaurantsCollection --drop  --file "restaurants.json"
 ```
-mongoimport --db restaurants --collection restaurants --file restaurantsjson --jsonArray
+
+in Windows the mongoimport script isn't added to path, if using default installation settings open cmd as admin and go to:
+
+```cmd
+$cd C:\Program\Files\MongoDB\Server\4.0\bin
 ```
 
 ## Learning Resources

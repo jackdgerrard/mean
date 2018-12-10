@@ -25,11 +25,11 @@ export class DataService {
   }
 
   //update the restaurant with new data that includes review
-  updateRestaurant(updatedRestaurant) {
+  newData(newData) {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
     return this.http
-      .post("http://localhost:3000/data/newReview", updatedRestaurant)
+      .post("http://localhost:3000/data/newData", newData)
       .pipe(map(res => res));
   }
 

@@ -51,7 +51,7 @@ export class RestaurantsComponent implements OnInit {
 
     console.table(temp)
 
-    this.data.updateRestaurant(temp).subscribe(data => {
+    this.data.newData(temp).subscribe(data => {
       if (data) {
         console.log(`review sent`);
       } else console.log(`error`);
