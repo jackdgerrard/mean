@@ -31,15 +31,18 @@ export class LoginComponent implements OnInit {
     //required fields
     if (!this.validateService.validateRegister(user)) {
       console.log("please fill in the required field");
+    } else {
+      this.auth.authenticateUser(user).subscribe(data => {
+        if (data.success == true) {
+          console.table(data)
+          this.cookieService.put("username", user.username);
+          this.router.navigate(["/home"]);
+        } else {
+          console.log(data.success);
+        }
+      });
     }
 
-    this.auth.authenticateUser(user).subscribe(data => {
-      if (data) {
-        this.cookieService.put("username", user.username);
-        this.router.navigate(["/home"]);
-      } else {
-        console.log(data);
-      }
-    });
+
   }
 }

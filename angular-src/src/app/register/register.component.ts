@@ -32,16 +32,17 @@ export class RegisterComponent implements OnInit {
     //required fields
     if (!this.validateService.validateRegister(user)) {
       console.log("please fill in the required field");
+    } else {
+      console.table(user)
+      //register User
+      this.auth.registerUser(user).subscribe(data => {
+        if (data) {
+          console.log(user.username + `\'s account has been created`);
+          this.cookieService.put("username", user.username);
+          this.router.navigate(["/home"]);
+        } else console.log(`error`);
+      });
+      //email validation here if email is implemented in applications user model
     }
-
-    //register User
-    this.auth.registerUser(user).subscribe(data => {
-      if (data) {
-        console.log(user.username + `\'s account has been created`);
-        this.cookieService.put("username", user.username);
-        this.router.navigate(["/home"]);
-      } else console.log(`error`);
-    });
-    //email validation here if email is implemented in applications user model
   }
 }
