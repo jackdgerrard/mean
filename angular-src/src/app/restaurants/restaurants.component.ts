@@ -27,6 +27,7 @@ export class RestaurantsComponent implements OnInit {
   //filters
   neighborhood
   type
+  term
 
   ngOnInit() {
     this.data.getData().subscribe(data => {
@@ -61,6 +62,13 @@ export class RestaurantsComponent implements OnInit {
 
   getByType() {
     this.data.getDatabyType(this.type).subscribe(data => {
+      this.allRestaurants = data;
+    });
+  }
+
+  getBySearch() {
+    this.data.getDatabySearch(this.term).subscribe(data => {
+      console.log(this.term)
       this.allRestaurants = data;
     });
   }

@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
+import { Http, HttpModule } from "@angular/http";
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -30,8 +30,8 @@ import { DataService } from "./data.service";
     AboutComponent,
     RestaurantsComponent
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,],
-  providers: [ValidateService, AuthService, DataService, CookieService],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule, HttpModule],
+  providers: [ValidateService, AuthService, DataService, CookieService, Http],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

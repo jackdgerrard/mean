@@ -31,7 +31,6 @@ router.get("/all", (req, res) => {
 
 router.get("/filter/type:query", (req, res) => {
   console.log(req.originalUrl + " request recieved");
-  console.table(req.params.query)
   db.collection('restaurantsCollection').find(
     { 'cuisine_type': req.params.query }
   ).toArray(function (err, results) {
@@ -42,9 +41,19 @@ router.get("/filter/type:query", (req, res) => {
 
 router.get("/filter/neighborhood:query", (req, res) => {
   console.log(req.originalUrl + " request recieved");
-  console.table(req.params.query)
   db.collection('restaurantsCollection').find(
     { 'neighborhood': req.params.query }
+  ).toArray(function (err, results) {
+    //console.table(results);
+    res.json(results);
+  })
+});
+
+router.get("/search:term", (req, res) => {
+  console.log(req.originalUrl + " request recieved");
+  console.table(req.params.term)
+  db.collection('restaurantsCollection').find(
+    { "name": { $regex: ".*" + req.params.term + ".*" } }
   ).toArray(function (err, results) {
     //console.table(results);
     res.json(results);

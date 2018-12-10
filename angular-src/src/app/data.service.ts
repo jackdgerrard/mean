@@ -19,15 +19,20 @@ export class DataService {
   getDatabyType(type) {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
-    console.table(type)
+
     return this.http.get(`http://localhost:3000/data/filter/type${type}`).pipe(map(res => res));
   }
 
   getDatabyNeighborhood(neighborhood) {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
-    console.table(neighborhood)
     return this.http.get(`http://localhost:3000/data/filter/neighborhood${neighborhood}`).pipe(map(res => res));
+  }
+
+  getDatabySearch(term) {
+    let headers = new HttpHeaders();
+    headers.append("Content-Type", "application/json");
+    return this.http.get(`http://localhost:3000/data/search${term}`).pipe(map(res => res));
   }
 
   //update the restaurant with new data that includes review

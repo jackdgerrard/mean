@@ -1,7 +1,7 @@
 <h1>Restaurants</h1>
 
 <h2>Filter by:</h2>
-<! --type -->
+<!--type -->
 <label for="type"> type </label>
 <select [(ngModel)]="type" name="type" required>
     <option value="American">American</option>
@@ -12,7 +12,9 @@
 
 <button (click)="getByType()">get By Type</button>
 
-<! --neighborhood -->
+
+
+<!--neighborhood -->
 <label for="neighborhood"> neighborhood </label>
 <select [(ngModel)]="neighborhood" name="type" required>
     <option value="Manhattan">Manhattan</option>
@@ -21,12 +23,22 @@
 </select>
 
 <button (click)="getByNeighborhood()">get By Neighborhood</button>
-<button (click)="resetFilter()">Reset Filters</button>
+
+
+<!-- search -->
+<h2>Search</h2>
+<input type="text" name="term" id="term" [(ngModel)]="term">
+<button (click)="getBySearch()"> Search </button>
+
+
+
 
 <h2>Sort</h2>
 <button (click)="ascending()">A-Z</button>
 <button (click)="descending()">Z-A</button>
 
+<h2>reset</h2>
+<button (click)="resetFilter()">Reset Filters</button>
 <div id="grid">
 
     <div id="flexbox" *ngIf="allRestaurants">
